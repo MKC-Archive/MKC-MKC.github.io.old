@@ -100,14 +100,12 @@ start_script()
   Text_TITLE "• Устанавливаю PHP7.2 •"
   	sudo apt-get install -y php7.2-cli
   Text_TITLE "• Установка PHP завершена •"
-  sleep 5
 
   Text_TITLE "• •"
 
   Text_TITLE "• Устанавливаю пакеты: python-pip python python3 •"
   	sudo apt-get install -y python-pip python python3
   Text_TITLE "• Установка Python завершена •"
-  sleep 3
 
   Text_TITLE "• •"
 
@@ -125,7 +123,6 @@ start_script()
 	  echo "phpmyadmin phpmyadmin/app-password-confirm password $MYPASS" | debconf-set-selections
 	  echo 'phpmyadmin phpmyadmin/reconfigure-webserver multiselect apache2' | debconf-set-selections
 	Text_TITLE "• ${red}PHPMyAdmin настроен! •"
-	sleep 5
 
 	Text_TITLE "• •"
 
@@ -139,7 +136,6 @@ start_script()
 	Text_TITLE "• Настраиваю Apache сервер •"
 	  STRING=$(apache2 -v | grep Apache/2.4)
 	Text_TITLE "• Apache настроен •"
-	sleep 3
 
 	Text_TITLE "• •"
 
@@ -248,7 +244,6 @@ start_script()
 	service apache2 restart
 	service mysql restart
 	Text_TITLE "• Команды перезапуска выполнены •"
-	sleep 5
 
 	clear
 	Text_SEPARATOR
@@ -278,23 +273,28 @@ start_script()
 wait()
 {
 	clear
-	Text_SEPARATOR
-	Text_INFO
-	Text_INFO "• ${blue}Ты точно хочешь запустить настройку сервера?"
-	Text_INFO "• ${blue}Are you sure you want to start setting up the server?"
-	Text_INFO
-	  Text_INFO "${green}• - 1 - ДА – YES ✔ •"
-	  Text_INFO "${red}• - 0 - НЕT – NO ✔ •"
-	Text_INFO
-	Text_SEPARATOR
-	Text_INFO "${blue}Want to continue? (Input: ${green}1 or ${red}0${blue}): "
-	# shellcheck disable=SC2162
-	# shellcheck disable=SC2039
-	read -p "${blue}Хотите продолжить? (Введи: ${green}1 или ${red}0${blue}): " case
-	case $case in
-		1) start_script;;
-		0) exit;;
-	esac
+	if [ "$USER" = "root" ]; then
+		Text_SEPARATOR
+		Text_INFO
+		Text_INFO "• ${blue}Ты точно хочешь запустить настройку сервера?"
+		Text_INFO "• ${blue}Are you sure you want to start setting up the server?"
+		Text_INFO
+		  Text_INFO "${green}• - 1 - ДА – YES ✔ •"
+		  Text_INFO "${red}• - 0 - НЕT – NO ✔ •"
+		Text_INFO
+		Text_SEPARATOR
+		Text_INFO "${blue}Want to continue? (Input: ${green}1 or ${red}0${blue}): "
+		# shellcheck disable=SC2162
+		# shellcheck disable=SC2039
+		read -p "${blue}Хотите продолжить? (Введи: ${green}1 или ${red}0${blue}): " case
+		case $case in
+			1) start_script;;
+			0) exit;;
+		esac
+		clear
+	else clear
+		Text_INFO "${red}You are not a root | Вы не root"
+	fi
 }
 
 wait
