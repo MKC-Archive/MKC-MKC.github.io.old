@@ -12,18 +12,14 @@ exec  > ${LOG_PIPE}
 exec  2> ${LOG_PIPE}
 
 __START__() {
-	# shellcheck disable=SC2059
-	# shellcheck disable=SC2145
 	printf "\033[1;32m$@\033[0m"
 }
 Text_INFO()
 {
-	# shellcheck disable=SC2145
 	__START__ "$@\n"
 }
 Text_n()
 {
-	# shellcheck disable=SC2145
 	Text_INFO "- - - $@"
 }
 Text_SEPARATOR()
@@ -33,7 +29,6 @@ Text_SEPARATOR()
 Text_TITLE()
 {
 	Text_SEPARATOR
-	# shellcheck disable=SC2145
 	Text_INFO "- - - $@"
 	Text_SEPARATOR
 }
@@ -43,21 +38,9 @@ green=$(tput setaf 2)
 yellow=$(tput setaf 3)
 blue=$(tput setaf 4)
 
-start_script()
+setup_server()
 {
   clear
-	# shellcheck disable=SC2162
-	# shellcheck disable=SC2039
-	Text_INFO "${blue}[Инфо]${green}: Введите путь к будущему каталогу с сайтом"
-	Text_INFO "${blue}[INFO]${green}: Enter the path for the future directory with the site"
-	Text_INFO
-	Text_INFO "${green}• (Пример | Example): ${yellow}/var/www ${green}"
-	Text_INFO
-	read -p "${green}Введи новый путь до сайта:${yellow} " INSTALL_DIR
-	clear
-	Text_INFO "${green}Enter ${red}domain ${green}or ${red}IP:${green}"
-	read -p "${green}Введи ${red}домен ${green}или ${red}IP:${green} " DOMAIN
-	clear
 
 	Text_TITLE "• Обновляю пакеты репозиториев •"
 	  apt-get update -y
@@ -263,7 +246,6 @@ start_script()
 	if [ "$STRING" = "" ]; then
 		FILE='/etc/apache2/conf.d/aiBash'
 		echo "<VirtualHost *:80>">$FILE
-		# shellcheck disable=SC2129
 		echo "ServerName $DOMAIN">>$FILE
 		echo "DocumentRoot $INSTALL_DIR">>$FILE
 		echo "<Directory $INSTALL_DIR/>">>$FILE
@@ -278,15 +260,11 @@ start_script()
 		echo "</VirtualHost>">>$FILE
 	else
 		FILE='/etc/apache2/conf-enabled/aiBash.conf'
-		# shellcheck disable=SC2164
 		cd /etc/apache2/sites-available
-		# shellcheck disable=SC2035
 		sed -i "/Listen 80/d" *
-		# shellcheck disable=SC2164
 		cd ~
 		echo "Listen 80">$FILE
 		echo "<VirtualHost *:80>">$FILE
-		# shellcheck disable=SC2129
 		echo "ServerName $DOMAIN">>$FILE
 		echo "DocumentRoot $INSTALL_DIR">>$FILE
 		echo "<Directory $INSTALL_DIR/>">>$FILE
@@ -312,7 +290,6 @@ start_script()
 	Text_n "•  >> service apache2 restart •"
 	  service apache2 restart
 	Text_n "•  >> cd ~ •"
-    # shellcheck disable=SC2164
     cd ~
 	Text_TITLE "• Выполнение команд завершено •"
 	sleep 3
@@ -336,7 +313,6 @@ start_script()
   Text_INFO "     "
 
 	Text_n "•  Возвращаемся в домашний каталог •"
-	  # shellcheck disable=SC2164
 	  cd ~
 	Text_n "• Продолжаем... •"
 
@@ -371,6 +347,8 @@ start_script()
 
 	clear
 	Text_SEPARATOR
+	Text_INFO "${red}Пожалуйста, оцените работу скрипта! ${yellow}https://clck.ru/N9mux"
+	Text_INFO
 		Text_TITLE "${green}• • t.me/${red}MiKillCrafter ${green}• •"
 	  Text_TITLE "${green}• • ${blue}https://MKC-MKC.GitHub.IO"
 	  Text_SEPARATOR
@@ -384,42 +362,148 @@ start_script()
 		Text_INFO
 		Text_SEPARATOR
 	Text_INFO
-	Text_TITLE "• Всё готово •"
-	Text_INFO "0 – Выход [Exit] ✔"
+	Text_TITLE "• Всё готово [All done]•"
+	  Text_INFO "1 – Установить бесплатный SSL [Install free SSL]"
+	  Text_INFO "2 – Меню [Menu]"
+	  Text_INFO "0 – Выход [Exit]"
 	Text_INFO
-	# shellcheck disable=SC2162
-	# shellcheck disable=SC2039
 	read -p "Введи 0 чтобы завершить: " case
 	case $case in
-		0) exit;;
+	  1) installCertificate;;
+	  2) menu;;
+	  0) exit;;
 	esac
 }
 
-wait()
+installCertificate()
+{
+	Text_TITLE "• Обновляю пакеты репозиториев •"
+	  apt-get update -y
+	Text_TITLE "• Завершаю обновление репозиториев •"
+
+	Text_TITLE "• Добавляю репозиторий universe •"
+	  add-apt-repository -y universe
+	Text_TITLE "• Репозиторий успешно добавлен •"
+
+	Text_TITLE "• Добавляю репозиторий certbot •"
+	  sudo add-apt-repository -y ppa:certbot/certbot
+	Text_TITLE "• Репозиторий успешно добавлен •"
+
+	Text_TITLE "• Устанавливаю software-properties-common •"
+	  apt-get install -y software-properties-common
+	Text_TITLE "• Репозиторий успешно добавлен •"
+
+	Text_TITLE "• Устанавливаю certbot && python-certbot-apache •"
+	  apt-get install -y certbot python-certbot-apache
+	Text_TITLE "• Репозиторий успешно добавлен •"
+
+	Text_TITLE "• Устанавливаем только сертификат для Apache •"
+	  sudo certbot certonly --webroot -w $INSTALL_DIR -d $DOMAIN -d www.$DOMAIN
+	Text_TITLE "• Сертификат установлен •"
+	clear
+
+	Text_TITLE "• [Ручная установка №1]: Введите публичный Email для аккаунта ACME и пройдите опрос •"
+	Text_INFO "${red}НАПОМИНАНИЕ:"
+	Text_INFO "${red}Сайт установлен по этому пути: ${blue}$INSTALL_DIR"
+	Text_INFO "${red}Ваш адрес сайта: ${yellow}http://$DOMAIN"
+	sleep 10
+	  sudo certbot certonly --standalone -d $DOMAIN -d www.$DOMAIN
+	  Text_INFO "Если всё прошло успешно, сертификат тут: /etc/letsencrypt/live/$DOMAIN/"
+	Text_TITLE "• [Ручная установка №1]: Завершена •"
+
+	Text_TITLE "• Создаю сертификат •"
+	  Text_INFO "Введите цифру нужного домена или несколько цифр, разделённых запятой."
+	  Text_INFO "Утилита сама установит всё, что нужно, а затем спросит вас,"
+	  Text_INFO "нужно ли перенаправлять http-трафик на https:"
+	  sleep 10
+	  sudo certbot run --apache
+	Text_TITLE "• Сертификат создан •"
+
+	Text_TITLE "• Обновляю сертификат •"
+	  sudo certbot certonly --apache -n -d $DOMAIN -d www.$DOMAIN
+	Text_TITLE "• Обновление заверено •"
+
+	Text_TITLE "${green}• Выполнение: ${blue}certbot renew --dry-run ${green}запушено: •"
+	  #sudo certbot renew
+	  sudo certbot renew --dry-run
+	Text_TITLE "${green}• Выполнение: ${blue}certbot renew --dry-run ${green}завершено •"
+	clear
+	Text_INFO "${green}Installation complected"
+	menu
+}
+
+updateCertificate()
+{
+  Text_SEPARATOR
+	Text_TITLE "• Update cert only •"
+	  sudo certbot certonly --apache -n -d $DOMAIN -d www.$DOMAIN
+	  sudo certbot renew
+	  #sudo certbot renew --dry-run
+	Text_SEPARATOR
+	clear
+	Text_TITLE "• Обновление заверено •"
+	menu
+}
+
+menu()
+{
+		Text_SEPARATOR
+		Text_INFO "${red}Пожалуйста, оцените работу скрипта! ${yellow}https://clck.ru/N9mux"
+		Text_INFO "• ${blue}Menu:"
+		  Text_INFO "${green}• - 1 – Настроить сервер [Setup server]"
+		  Text_INFO "${green}• - 2 – ${red}[beta] ${green}Установить бесплатный SSL [Install free SSL]"
+		  Text_INFO "${green}• - 3 – ${red}[beta] ${green}Обновить истёкший SSL сертификат [Update an expired SSL certificate]"
+		  Text_INFO "${green}• - 4 – Вернутся чтобы изменить IP-адрес или папку для сайта [Back for change IP or folder for the site]"
+		  Text_INFO
+		  Text_INFO "${red}• - 0 – Выход [Exit]"
+		Text_SEPARATOR
+		Text_INFO "${blue}What u choose, senpai?: "
+		read -p "${blue}Что ты выбираешь, сэмпай?: " case
+		case $case in
+			1) setup_server;;
+			2) installCertificate;;
+			3) updateCertificate;;
+			4) InputArrayData;;
+			0) exit;;
+	esac
+}
+
+InputArrayData()
 {
 	clear
-	if [ "$USER" = "root" ];then
+	Text_INFO "${blue}[Инфо]${green}: Введите путь к папке с сайтом"
+	Text_INFO "${blue}[INFO]${green}: Enter the path to the directory with the site"
+	Text_INFO
+	Text_INFO "${green}• (Пример | Example): ${yellow}/var/www ${green}"
+	Text_INFO
+	read -p "${green}Введи путь до сайта:${yellow} " INSTALL_DIR
+	clear
+	Text_INFO "${green}Enter ${red}domain ${green}or ${red}IP:"
+	read -p "${green}Введи ${red}домен ${green}или ${red}IP:${green} " DOMAIN
+	clear
+	menu
+}
+
+start()
+{
+	clear
+	if [ "$USER" = "root" ]; then
 		Text_SEPARATOR
 		Text_INFO
-		Text_INFO "• ${blue}Ты точно хочешь запустить настройку сервера?"
-		Text_INFO "• ${blue}Are you sure you want to start setting up the server?"
+		Text_INFO "• [Apache2] ${blue}Ты точно хочешь запустить настройку сервера?"
+		Text_INFO "• [Apache2] ${blue}Are you sure you want to start setting up the server?"
 		Text_INFO
 		  Text_INFO "${green}• - 1 - ДА – YES ✔ •"
 		  Text_INFO "${red}• - 0 - НЕT – NO ✔ •"
 		Text_INFO
 		Text_SEPARATOR
 		Text_INFO "${blue}Want to continue? (Input: ${green}1 or ${red}0${blue}): "
-		# shellcheck disable=SC2162
-		# shellcheck disable=SC2039
 		read -p "${blue}Хотите продолжить? (Введи: ${green}1 или ${red}0${blue}): " case
 		case $case in
-			1) start_script;;
+			1) InputArrayData;;
 			0) exit;;
-		esac
-		clear
-	else clear
-		Text_INFO "${red}You are not a root | Вы не root"
-	fi
+		esac; clear
+	else clear; Text_INFO "${red}You are not a root | Вы не root"; fi
 }
 
-wait
+start
