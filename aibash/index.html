@@ -7,9 +7,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <link rel="shortcut icon" type="image/png" href="../favicon.png">
     
-	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css?1271">
-	<link rel="stylesheet" type="text/css" href="../style.css?5665">
-	<link rel="stylesheet" type="text/css" href="../css/animate.min.css?6754">
+	<link rel="stylesheet" type="text/css" href="../css/bootstrap.min.css?9270">
+	<link rel="stylesheet" type="text/css" href="../style.css?8146">
+	<link rel="stylesheet" type="text/css" href="../css/animate.min.css?9866">
 	<link rel="stylesheet" type="text/css" href="../css/font-awesome.min.css">
 	<link rel="stylesheet" type="text/css" href="../css/ionicons.min.css">
 	<link href='https://fonts.googleapis.com/css?family=Montserrat&display=swap&subset=latin,latin-ext' rel='stylesheet' type='text/css'>
@@ -31,31 +31,33 @@
 	<div class="container ">
 		<div class="row">
 			<div class="col">
+				<div><div class="page-scroll-progress-bar  hide-in-blocs-page-preview-snapshot bottom-edge" style="height: 4px; background-color: rgb(69, 175, 205); background-position: initial initial; background-repeat: initial initial;"></div>
+				</div>
 				<nav class="navbar navbar-light row navbar-expand-lg" role="navigation">
-					<a class="navbar-brand link-style" href="../">MKC-MKC</a>
-					<button id="nav-toggle" type="button" class="ml-auto ui-navbar-toggler navbar-toggler border-0 p-0 menu-icon-rounded-uneven-list" data-toggle="collapse" data-target=".navbar-49696" aria-expanded="false" aria-label="Toggle navigation">
-						<span class="navbar-toggler-icon"></span>
-					</button>
-					<div class="collapse navbar-collapse navbar-49696  sidebar-nav">
-						<ul class="site-navigation nav navbar-nav ml-auto">
-							<li class="nav-item">
-								<a href="../" class="nav-link">Главная</a>
-							</li>
-							<li class="nav-item">
-								<a href="../search/" class="nav-link">Поиск</a>
-							</li>
-							<li class="nav-item">
-								<a href="../phpless/" class="nav-link">phpLess</a>
-							</li>
-							<li class="nav-item">
-								<a href="../linkbridge/" class="nav-link">LinkBridge</a>
-							</li>
-							<li class="nav-item">
-								<a href="." class="nav-link">aiBash</a>
-							</li>
-						</ul>
-					</div>
-				</nav>
+						<a class="navbar-brand link-style" href="../">MKC-MKC</a>
+						<button id="nav-toggle" type="button" class="ml-auto ui-navbar-toggler navbar-toggler border-0 p-0 menu-icon-rounded-uneven-list" data-toggle="collapse" data-target=".navbar-49696" aria-expanded="false" aria-label="Toggle navigation">
+							<span class="navbar-toggler-icon"></span>
+						</button>
+						<div class="collapse navbar-collapse navbar-49696  sidebar-nav">
+							<ul class="site-navigation nav navbar-nav ml-auto">
+								<li class="nav-item">
+									<a href="../" class="nav-link">Главная</a>
+								</li>
+								<li class="nav-item">
+									<a href="../search/" class="nav-link">Поиск</a>
+								</li>
+								<li class="nav-item">
+									<a href="../phpless/" class="nav-link">phpLess</a>
+								</li>
+								<li class="nav-item">
+									<a href="../linkbridge/" class="nav-link">LinkBridge</a>
+								</li>
+								<li class="nav-item">
+									<a href="." class="nav-link">aiBash</a>
+								</li>
+							</ul>
+						</div>
+					</nav>
 			</div>
 		</div>
 	</div>
@@ -90,10 +92,10 @@
 
 <!-- install-block -->
 <div class="bloc tc-ucla-blue l-bloc" id="install-block">
-	<div class="container bloc-lg">
-		<div class="row">
+	<div class="container bloc-xxl">
+		<div class="row row-install-block-margin-top">
 			<div class="col-md-5 align-self-center scroll-fx-down-in-fade">
-				<img src="../img/aiBash-screenshot.png" class="img-fluid img-5-style mx-auto d-block" alt="aiBash screenshot" />
+				<img src="../img/lazyload-ph.png" data-src="../img/aiBash-screenshot.png" class="img-fluid img-5-style mx-auto d-block lazyload" alt="aiBash screenshot" />
 			</div>
 			<div class="align-self-center col-md-7 scroll-fx-down-in-fade">
 				<h2 class="mg-md tc-prussian-blue h2-aibash-style btn-resize-mode">
@@ -121,8 +123,8 @@
 <!-- bloc-14 -->
 <div class="bloc none bloc-tile-2 tc-ucla-blue l-bloc" id="bloc-14">
 	<div class="container bloc-sm">
-		<div class="row">
-			<div class="col-12 col-lg-10 offset-lg-3 scroll-fx-out-fade scroll-fx-down-in-fade">
+		<div class="row row-bloc-14-margin-top">
+			<div class="col-12 col-lg-10 offset-lg-3">
 				<h3 class="mg-md tc-prussian-blue btn-resize-mode h3-bloc-14-style">
 					Устанавливаемые пакеты [v.2020.04.22]
 				</h3>
@@ -151,7 +153,7 @@
 <div class="bloc none bloc-tile-2 tc-ucla-blue l-bloc" id="bloc-15">
 	<div class="container bloc-sm">
 		<div class="row">
-			<div class="col-12 col-lg-10 scroll-fx-out-fade scroll-fx-down-in-fade">
+			<div class="col-12 col-lg-10 bloc-bloc-15-margin-top">
 				<h3 class="mg-md tc-prussian-blue btn-resize-mode h3-bloc-15-style">
 					<span class="fa fa-github"></span> Помогите в разработке
 				</h3>
@@ -174,28 +176,20 @@
 <!-- ScrollToTop Button END-->
 
 
-<!-- footer -->
-<div class="bloc full-width-bloc l-bloc" id="footer">
-	<div class="container ">
-		<div class="row">
-			<div class="col">
-				<p class="btn-resize-mode p-bloc-15-style mg-clear">
-					Все права пренадлежат их владельцам если таковые имеются.&nbsp;На данном сайте расположена открытая информация не нарушающая лицензионное соглашение и содержит материалы которыми может воспользоваться каждый.<br>Данный сайт сделан для личных целей. Разрешается использование продуктов в личном и коммерческих целях при соблюдении&nbsp;<a class="ltc-ferrari-red" href="../mit-license/">MIT Лицензии</a>.&nbsp;<a class="ltc-cornflower-blue" href="https://linkbridge.ru/deep/?tg=MiKillCrafter" rel="nofollow noopener noreferrer">Telegram</a><br>
-				</p>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- footer END -->
-
 </div>
 <!-- Main container END -->
     
 
-<script src="../js/jquery-3.3.1.min.js?8808"></script>
-<script src="../js/bootstrap.bundle.min.js?9144"></script>
-<script src="../js/blocs.min.js?4370"></script>
-<script src="../js/scrollFX.js?5201"></script>
+<!-- Additional JS -->
+<script src="../js/jquery-3.3.1.min.js?8217"></script>
+<script src="../js/bootstrap.bundle.min.js?2751"></script>
+<script src="../js/blocs.min.js?4500"></script>
+<script src="../js/lazysizes.min.js" defer></script>
+<script src="../js/page-scroll-progress.js?189"></script>
+<script src="../js/jquery.scrollify.js?9869"></script>
+<script src="../js/tilt.jquery.js?2388"></script>
+<script src="../js/waves.js?8395"></script>
+<script src="../js/scrollFX.js?1369"></script>
 <!-- Additional JS END -->
 
 
