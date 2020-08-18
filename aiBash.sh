@@ -138,9 +138,9 @@ setup_server()
 
 	Text_INFO "     "
 
-  Text_TITLE "• Устанавливаю пакет php7.2-cli •"
-  	sudo apt-get install -y php7.2-cli
-  Text_TITLE "• Установка php7.2-cli завершена •"
+  Text_TITLE "• Устанавливаю пакет php7.4-cli •"
+  	sudo apt-get install -y php7.4-cli
+  Text_TITLE "• Установка php7.4-cli завершена •"
   sleep 5
   clear
 
@@ -298,7 +298,7 @@ setup_server()
 
   Text_TITLE "• • Создаю, подключаю и очищаю каталог, где будет хранится сайт: ${red}$INSTALL_DIR${green} • •"
 	  mkdir $INSTALL_DIR/
-	  sudo chmod 775 /$INSTALL_DIR
+	  sudo chmod 777 /$INSTALL_DIR
 	  cd $INSTALL_DIR/
 	  rm -Rfv *
 	Text_TITLE "• Каталог создан •"
