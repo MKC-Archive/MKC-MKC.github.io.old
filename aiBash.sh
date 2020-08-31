@@ -478,6 +478,7 @@ InputArrayData()
 	Text_INFO
 	read -p "${green}Введи путь до сайта:${yellow} " INSTALL_DIR
 	clear
+	sudo ifconfig
 	Text_INFO "${green}Enter ${red}domain ${green}or ${red}IP:"
 	read -p "${green}Введи ${red}домен ${green}или ${red}IP:${green} " DOMAIN
 	clear
