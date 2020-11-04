@@ -46,11 +46,11 @@ setup_server()
 	  apt -y update
 	Text_TITLE "• Завершаю обновление репозиториев •"
 
-	Text_TITLE "• Выполняю: apt -y autoremove •"
-	  apt -y autoremove
+	Text_TITLE "• Выполняю: apt autoremove -y•"
+	  apt autoremove -y
 	Text_TITLE "• Завершаю •"
 
-	Text_TITLE "• Выполняю: apt -y clean •"
+	Text_TITLE "• Выполняю: apt clean •"
 	  apt -y clean
 	Text_TITLE "• Завершаю •"
 
