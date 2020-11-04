@@ -43,11 +43,25 @@ setup_server()
   clear
 
 	Text_TITLE "• Обновляю пакеты репозиториев •"
-	  apt-get update -y
+	  apt -y update
 	Text_TITLE "• Завершаю обновление репозиториев •"
+
+	Text_TITLE "• Выполняю: apt -y autoremove •"
+	  apt -y autoremove
+	Text_TITLE "• Завершаю •"
+
+	Text_TITLE "• Выполняю: apt -y clean •"
+	  apt -y clean
+	Text_TITLE "• Завершаю •"
+
+  Text_TITLE "• Выполняю: apt -y install --fix-missing •"
+	  apt -y install --fix-missing
+	Text_TITLE "• Завершаю •"
 
 	Text_TITLE "• Подготовка к установке: •"
 	Text_INFO "     "
+
+  sleep 5
 
   Text_TITLE "• >> Устанавливаю важные пакеты... •"
   Text_SEPARATOR
@@ -82,9 +96,7 @@ setup_server()
 
     Text_INFO
 
-    Text_INFO "${blue}[INSTALL]:${green} sudo"
-	    apt-get install -y sudo
-	  Text_INFO "${blue}[COMPLECTED]:${green} sudo"
+  sleep 5
 
     Text_INFO
 
@@ -127,6 +139,8 @@ setup_server()
   Text_TITLE "• Устанавливаю репозитории phpmyadmin •"
     sudo add-apt-repository -y ppa:phpmyadmin/ppa
   Text_TITLE "• Репозитории добавлены •"
+
+  sleep 3
 
   Text_INFO "     "
 
@@ -307,6 +321,8 @@ setup_server()
 
   Text_TITLE "• • Теперь создаю тестовый файл index.php • •"
     echo "<?php phpinfo(); ?>" > index.php
+    Text_TITLE "• • Выдаю права 777. Измените обязательно! • •"
+    sudo chmod 777 ./*
   Text_n "•  Тестовый файл создан •"
   sleep 3
 
@@ -424,7 +440,6 @@ installCertificate()
 	Text_TITLE "• Обновление заверено •"
 
 	Text_TITLE "${green}• Выполнение: ${blue}certbot renew --dry-run ${green}запушено: •"
-	  #sudo certbot renew
 	  sudo certbot renew --dry-run
 	Text_TITLE "${green}• Выполнение: ${blue}certbot renew --dry-run ${green}завершено •"
 	clear
@@ -448,7 +463,7 @@ updateCertificate()
 menu()
 {
 		Text_SEPARATOR
-		Text_INFO "${red}Пожалуйста, оцените работу скрипта! ${yellow}https://clck.ru/N9mux"
+		Text_INFO "${red}Пожалуйста, оцените работу скрипта!"
 		Text_INFO "• ${blue}Menu:"
 		  Text_INFO "${green}• - 1 – Настроить сервер [Setup server]"
 		  Text_INFO "${green}• - 2 – ${red}[beta] ${green}Установить бесплатный SSL [Install free SSL]"
@@ -457,8 +472,8 @@ menu()
 		  Text_INFO
 		  Text_INFO "${red}• - 0 – Выход [Exit]"
 		Text_SEPARATOR
-		Text_INFO "${blue}What u choose, senpai?: "
-		read -p "${blue}Что ты выбираешь, сэмпай?: " case
+		Text_INFO "${blue}What u choose?: "
+		read -p "${blue}Что ты выбираешь?: " case
 		case $case in
 			1) setup_server;;
 			2) installCertificate;;
@@ -491,8 +506,8 @@ start()
 	if [ "$USER" = "root" ]; then
 		Text_SEPARATOR
 		Text_INFO
-		Text_INFO "• [Apache2] ${blue}Ты точно хочешь запустить настройку сервера?"
-		Text_INFO "• [Apache2] ${blue}Are you sure you want to start setting up the server?"
+		Text_INFO "• [Apache2] ${blue}Ты точно хочешь запустить настройку Ubuntu сервера?"
+		Text_INFO "• [Apache2] ${blue}Are you sure you want to start setting up the Ubuntu server?"
 		Text_INFO
 		  Text_INFO "${green}• - 1 - ДА – YES ✔ •"
 		  Text_INFO "${red}• - 0 - НЕT – NO ✔ •"
