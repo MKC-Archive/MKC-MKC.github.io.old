@@ -3,7 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="254ace2b-75c1-4720-ad5c-8beb15dc93e9" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/aiBash.sh" beforeDir="false" afterPath="$PROJECT_DIR$/aiBash.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aibash/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/aibash/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,7 +38,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604526051027</updated>
-      <workItem from="1604526052254" duration="710000" />
+      <workItem from="1604526052254" duration="796000" />
     </task>
     <servers />
   </component>
