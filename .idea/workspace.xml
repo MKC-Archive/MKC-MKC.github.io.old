@@ -2,7 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="254ace2b-75c1-4720-ad5c-8beb15dc93e9" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/aiBash.sh" beforeDir="false" afterPath="$PROJECT_DIR$/aiBash.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/aibash/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/aibash/index.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -21,7 +22,9 @@
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent">
+    <property name="ASKED_SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="true" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
@@ -35,11 +38,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1604526051027</updated>
-      <workItem from="1604526052254" duration="23000" />
+      <workItem from="1604526052254" duration="452000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="667" y="295" width="586" height="490" key="find.popup" timestamp="1604526162032">
+      <screen x="0" y="0" width="1920" height="1080" />
+    </state>
+    <state x="667" y="295" width="586" height="490" key="find.popup/0.0.1920.1080@0.0.1920.1080" timestamp="1604526162032" />
   </component>
 </project>
